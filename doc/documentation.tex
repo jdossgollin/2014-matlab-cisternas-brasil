@@ -26,7 +26,7 @@ cleveref % automatic cross-references
 
 % Custom macros relating to the paper
 \newcommand{\thepaper}{Analytic Modeling of Rainwater Harvesting in the Brazilian Semi-Arid Northeast}
-\newcommand{\github}{\url{https://github.com/jdossgollin/cisternasbrazil}}
+\newcommand{\github}{\url{https://github.com/jdossgollin/cisternas}}
 
 % Document Information
 \title{Model Replication Guide: \\ \thepaper}
@@ -41,8 +41,8 @@ cleveref % automatic cross-references
 This is a guide to the model used in the paper \thepaper \ (henceforth \cite{dossgollin2015}).
 This document will explain the steps needed to replicate the findings of \cite{dossgollin2015}, including accessing and downloading the data, cleaning and formatting the data, and running the model under default assumptions or sensitivity analysis.
 This document is intended to accompany the paper \cite{dossgollin2015} , which explains the choices and assumptions that drive this model.
-If you have remaining questions, please post them on the Github site \github.
 \end{abstract}
+
 
 \clearpage
 \tableofcontents
@@ -206,11 +206,23 @@ It is worth noting that after running the model, several data files in \fn{.mat}
 This \fn{doc} folder contains the documentation required for you to run the program.
 A \code{.pdf} file is compatible on virtually all machines.
 For those who are interested, we also provide the \code{.tex} code used to generate the \code{.pdf} document.
+The \code{.bib} file containing references used in this document is also provided.
+
+
+\section{Further Questions}
+
+This model is hosted on \code{Github} and we request that all feedback or questions related to implementation of the model go through that site.
+Please visit \github and click the \usee{Issue} tab.
+This allows us to respond to your comment as rapidly as possible.
+It also ensures that others have access to your question and our response.
+We will prioritize issues that relate to bugs in the software or help needed over feature requests.
+
 
 
 % Appendix --------------------------------------------
-\appendix
+
 \clearpage
+\appendix
 \part*{Appendix}
 
 \section{Acronyms Used}
