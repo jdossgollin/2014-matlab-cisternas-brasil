@@ -1,11 +1,18 @@
+# Latex-Generated Files
 *.aux
 *.log
 *.out
 *.mat
 *.toc
 *.synctex.gz
-.DS_Store
 *.bbl
 *.blg
 *.bib.bak
+
+# Apple-Generated Files (for OS X)
+.DS_Store
+
+# Downloaded Data 
+# We are not permitted to disseminate this data
+# See documentation for more information
 data/INMET/*.txt
