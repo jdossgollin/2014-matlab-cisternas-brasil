@@ -1,0 +1,11 @@
+*.aux
+*.log
+*.out
+*.mat
+*.toc
+*.synctex.gz
+.DS_Store
+*.bbl
+*.blg
+*.bib.bak
+data/INMET/*.txt

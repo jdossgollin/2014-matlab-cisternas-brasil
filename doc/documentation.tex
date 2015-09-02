@@ -1,0 +1,228 @@
+\documentclass[11pt]{article} %
+
+\usepackage[american]{babel} %for language
+\usepackage[utf8]{inputenc} %utf8x to allow input of non-English characters
+\usepackage[letterpaper]{geometry} %set the size of the page and margins
+\usepackage{natbib} % bibliography management with bibtex
+\bibliographystyle{agu} % natbib style
+
+% some more useful packages to load
+\usepackage{amsmath, % standard math library
+graphicx, % input figures if needed
+mathpazo, % changed fonts
+setspace, % custom spacing
+siunitx, % follow SI unit conventions
+acronym, % automatically handle acronyms in the text
+hyperref, % clickable cross-references and URLs
+cleveref % automatic cross-references
+} 
+
+
+% Custom Macros
+\newcommand{\fn}[1]{\texttt{#1}} % customize appearance of filename
+\newcommand{\code}[1]{\texttt{#1}} % customize appearance of code snippets
+\newcommand{\mtlb}{\texttt{Matlab\ }}
+\newcommand{\usee}[1]{\textit{#1}} % usee = what you see on the website
+
+% Custom macros relating to the paper
+\newcommand{\thepaper}{Analytic Modeling of Rainwater Harvesting in the Brazilian Semi-Arid Northeast}
+\newcommand{\github}{\url{https://github.com/jdossgollin/cisternasbrazil}}
+
+% Document Information
+\title{Model Replication Guide: \\ \thepaper}
+\author{James Doss-Gollin \and Francisco de Assis de Souza Filho \and Francisco Osny En\'{e}as da Silva}
+
+
+%-----------------------------------------
+\begin{document}
+\maketitle %titlepage
+
+\begin{abstract} % summary of this document
+This is a guide to the model used in the paper \thepaper \ (henceforth \cite{dossgollin2015}).
+This document will explain the steps needed to replicate the findings of \cite{dossgollin2015}, including accessing and downloading the data, cleaning and formatting the data, and running the model under default assumptions or sensitivity analysis.
+This document is intended to accompany the paper \cite{dossgollin2015} , which explains the choices and assumptions that drive this model.
+If you have remaining questions, please post them on the Github site \github.
+\end{abstract}
+
+\clearpage
+\tableofcontents
+\clearpage % start on a new page
+
+
+\section{Quick Start}
+
+There are some steps you must perform in order to replicate this model.
+Each step is described in greater detail below.
+\begin{enumerate}
+\item Ensure that you have all appropriate software. See \cref{requirements} for help.
+\item Register with the \ac{INMET} and download the data. We apologize that we are not able to provide you with our raw data, due to the data use policy of the \ac{INMET} which owns the data. Downloading their data is straightforward, except that the web site is in Portuguese. For step-by-step instructions please see \cref{dload}.
+\item Run the model under normal conditions (\cref{defparam}) and/or run a sensitivity analysis (\cref{modparam}).
+\end{enumerate}
+
+
+
+\section{System Requirements} \label{requirements}
+
+Access to \mtlb proprietary software is required.
+This model was created and has been tested on \mtlb 2014a and 2015a, and its compatibility with other versions is not guaranteed.
+Some toolkits beyond the core may be required, and specifically the Mapping Toolkit is required to draw figures (this feature is not required in order to run the program).
+We request that anyone attempting to run this model on other versions of Matlab advise us of the compatibility so that we can update this document.
+The model should function independently and should work on most standard operating systems: it has been tested successfully on Linux Mint 17, Microsoft Windows 8, and OS X Yosemite.
+
+
+\section{Downloading the Raw Data} \label{dload}
+
+\subsection{Data Use Policy}
+We understand that the most convenient and efficient way for you to use this model is for us to include our data along with our code.
+Unfortunately, doing so would violate the data use policy of the \ac{INMET}, which owns the data.
+They require that each person who uses the data register with their online site.
+Therefore, all we can do is provide the best possible instructions for accessing their data.
+
+\subsection{Registering with the \acs{INMET}}
+In order to download the data from the \ac{INMET} you need to create an account with them.
+Because their web page is written only in Portuguese, this section will walk you through that process.
+
+\begin{enumerate}
+\item Go to \url{http://www.inmet.gov.br/projetos/rede/pesquisa/}. If, for some reason, that web link fails then try searching for \code{BDMEP - Banco de Dados Meteorol\'{o}gicos para Ensino e Pesquisa INMET}.
+\item Click the large green button that says \usee{Novo Cadastro}.
+\item Fill out the resulting form as follows:
+
+\begin{description}
+\item[Usu\'{a}rio] enter your e-mail	
+\item[Redigite (e-mail)] re-enter your e-mail for verification
+\item[Nome] Your first name
+\item[Sobrenome] Your last name
+\item[Tipo (N,E e G)] leave as N (do not modify)
+\item[Institui\c{c}\~{a}o] your institution (university, government agency, etc.) If none apply, write \code{N/a}
+\item[Cargo/Fun\c{c}\~{a}o] your position within that institution. If none apply, write \code{researcher}
+\item[Documento (RG)]
+\item[CPF]
+\item[Endere\c{c}o] Your work address
+\item[CEP]
+\item[Telefones] Your telephone number. Please enter a number beginning with +1
+\item[\'{A}rea de aplica\c{c}\~{a}o dos dados] This question is requesting what you will use the data for. Please write \code{Research}. 
+\end{description}
+
+\end{enumerate}
+
+\subsection{Downloading the Data}
+\begin{enumerate}
+\item Go to the \ac{INMET} \ac{BDMEP} website at \url{http://www.inmet.gov.br/projetos/rede/pesquisa/inicio.php}.
+\item Enter your user name (your email address) and password
+\item Under the \usee{Pesquisa -- Esta\c{c}ao Convencional} tab, click on the link that says \usee{S\'{e}rie Hist\'{o}rica -- Dados Di\'{a}rios}
+
+\item Fill out the new dialogue box as follows:
+\begin{description}
+\item[Per\'{i}odo - Data inicio (dd/mm/aaaa)] Start date (dd/mm/yyyy format). \citet{dossgollin2015} uses 01/01/1950.
+\item[fim] End date (dd/mm/yyyy format). \citet{dossgollin2015} uses 31/12/2013.
+\item[Drop-Down Menu] the quickest option is to select the drop-down menu on the left (\usee{Regi\~{a}o)} and select \usee{Nordeste}. However, this may omit one or more of the stations used in \cite{dossgollin2015}. For full replication, you must select Cear\'{a} from the drop-down menu on the right. The following steps will then need to be repeated for the states of Rio Grande do Norte, Paraiba, Pernambuco, Alagoas, Sergipe, Bahia, Minas Gerais, Piau\'{i}, and Maranh\~{a}o.
+\item[checkbox] Click the checkbox corresponding to \usee{precipita\c{c}\~{a}o (mm)}.
+\item[submit] Click the button at the bottom that says \usee{pesquisa}. Confirm if you are asked to do so.
+\end{description}
+
+\item A list of stations will appear on the right. For each one, you must:
+\begin{enumerate}
+\item Click on the station
+\item Open the resulting tab
+\item Save the data to a text file with the name \code{\#\#\#\#\#.txt}, where \code{\#\#\#\#\#} is the station code (you will see \usee{(OMM: \#\#\#\#\#)}). Please note that a typo in this file name should not affect the code in any way.
+\end{enumerate}
+\item When you have downloaded all files, move all the text files into the \fn{data/INMET} folder. 
+\end{enumerate}
+
+We apologize that this process is so time-consuming.
+
+
+\section{Running the Model}
+
+Before you can run the model, you need to download the raw data from the \ac{INMET} and move the raw text files to the \fn{data/INMET} folder.
+If you have not already done that, see \cref{dload}.
+Otherwise, you are ready to run the model: it is designed to work as soon as it is downloaded.
+
+\subsection{Running with Default Parameters} \label{defparam}
+
+All you need to do to run the model is to run the script \fn{main.m}.
+It is  important not to modify the directory structure or move files out of the directory, because they call each other using relative paths.
+This script prints results to screen.
+By default, map generation is turned off; to change this option, change the \code{const.opt.figure toggle} option in \fn{declarations.m} to \code{1} (see \cref{modparam} for details on modifying parameters).
+You should see results printed to screen giving average calculated reliabilities for different roof sizes.
+
+\subsection{Modifying Parameters} \label{modparam}
+
+All parameters should be modified exclusively in the \fn{declarations.m} file.
+Parameters and options are designed to be passed through the struct called \code{const} and are not hard-coded into individual functions. 
+\fn{declarations.m} describes each parameter and its role in the model.
+If modifying {declarations.m} it is recommended to leave the default parameters commented, rather than deleting them, so that it is easier to return to the default configuration.
+It is also important to note that the \fn{getData.m} script looks for two files: \fn{data.mat} and \fn{data\_unfiltered.mat}. 
+If \fn{data.mat exists}, then \fn{getData.m} will simply load \fn{data.mat} and will not attempt to filter the data.
+If \fn{data.mat} does not exist but \fn{data\_unfiltered.mat} does exist, it will load and filter this data but will not attempt to re-read files added to the \fn{INMET} folder.
+For this reason, after changing the criteria by which the data should be filtered it is imperative to delete \fn{data.mat} and after altering the raw data from the \ac{INMET} it is imperative to delete both \fn{data.mat} and \fn{data\_unfiltered.mat}.
+
+
+\subsection{Sensitivity Analyses}
+
+To carry out sensitivity analyses, use the \fn{mainForSensitivityAnalysis.m} script. 
+The script is divided into sections, each of which lays out sensitivity analyses for a different model parameter. 
+To run all analyses, run the script; to run analysis for a single variable, position the cursor within that section and click the \code{Run Section} command.
+To modify the values of one or more of the parameters manually, change it in this section (not in \fn{declarations.m}). 
+That is because this file calls \fn{declarations.m} and over-rides the parameter for which the sensitivity analysis is being carried out.
+The \fn{mainForSensitivityAnalysis.m} script displays results to the screen and creates a new folder \fn{Results} in which results for each variable are saved as \fn{.csv} files.
+Note that only numbers -- no header rows or roof sizes -- are printed to the \code{.csv} files.
+
+\section{Description of Files}
+The folder containing this model is organized as follows.
+There are three folders, called \fn{data} , \fn{doc} , and \fn{code}.
+The contents of each are briefly summarized in this section.
+
+\subsection{The \fn{code} Folder}
+The following \mtlb files are included in the \fn{code} directory. Documentation of each can be accessed by typing \code{help fname}, where \code{fname} is the name of the file. A brief summary of each file is provided here:
+\begin{description}
+\item[\fn{main.m}] calls all functions required to run the model. To run the model, just run this file.
+\item[\fn{mainForSensitivityAnalysis.m}] calls all functions required to run sensitivity analysis.
+\item[\fn{declarations.m}] defines model options and parameters; saves them to a single struct which is passed as an argument to many other functions.
+\item[\fn{getData.m}] determines what data has already been loaded and calls functions to read raw data from text file and filter data if filtered data does not already exist.
+\item[\fn{readINMET.m}] function to read data files in \fn{.txt} format downloaded from the \ac{INMET} website. This script reads post number, coordinates, and first word of post name; saves precipitation data as \fn{.mat} file.
+\item[\fn{makePrecipMatrix.m}] reads precipitation .mat files generated by \fn{readINMET.m} and creates a single matrix for all specified posts.
+\item[\fn{filterData.m}] filters data by location and quality.
+\item[\fn{loadRoofData.m}] reads roof data from one of the three files specified in \cref{dfolder}.
+\item[\fn{cConsumption.m}] calculates consumption as a function of the consumption rule specified in declarations.m and day of the year.
+\item[\fn{cBalance.m}] carries out water balance for set of meteorological posts.
+\item[\fn{drawMaps.m}] draws maps and plots results of analysis.
+\end{description}
+
+\subsection{The \fn{data} Folder} \label{dfolder}
+The data folder contains three child directories which contain separate data sets:
+\begin{description}
+\item[\fn{INMET}] is currently empty. Once you have downloaded the data from the \
+\item[\fn{Roofs}] contains four text files containing roof data:
+\begin{description}
+\item[\fn{default.txt}] contains the default set of roofs used for the simulation as presented in the article.
+\item[\fn{Milha.txt}] contains the full distribution of roof sizes published available as a supplemental file to the online version of the article.
+\end{description}
+\item[\fn{shapefile\_brasil}] contains a an ESRI-format shapefile, generated by the \ac{IBGE}, which is used to overlay the political divisions of Brazil onto maps.
+\end{description}
+It is worth noting that after running the model, several data files in \fn{.mat} format will be generated and saved directly in the data folder.
+
+\subsection{The \fn{doc} Folder} \label{doc}
+This \fn{doc} folder contains the documentation required for you to run the program.
+A \code{.pdf} file is compatible on virtually all machines.
+For those who are interested, we also provide the \code{.tex} code used to generate the \code{.pdf} document.
+
+
+% Appendix --------------------------------------------
+\appendix
+\clearpage
+\part*{Appendix}
+
+\section{Acronyms Used}
+
+\begin{acronym}[INMET] % optional parameter sets column width
+\acro{INMET}{Instituto Nacional de Meteorologia -- National Meteorology Institution}
+\acro{IBGE}{Instituto Brasileiro de Geografia e Estat\'{i}stica -- Brazilian Institute of Geography and Statistics}
+\acro{BDMEP}{Banco de Dados Meteorol\'{o}gicos para Ensino e Pesquisa -- Meteorological Database for Research and Teaching}
+\end{acronym}
+
+\addcontentsline{toc}{section}{References} % add the bibliography to the table of contents
+\bibliography{library} % references used
+
+
+\end{document}
