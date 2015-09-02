@@ -2,7 +2,6 @@
 *.aux
 *.log
 *.out
-*.mat
 *.toc
 *.synctex.gz
 *.bbl
@@ -16,3 +15,7 @@
 # We are not permitted to disseminate this data
 # See documentation for more information
 data/INMET/*.txt
+
+# Model-Generated Files
+# Ignored to minimize repository size
+*.mat
