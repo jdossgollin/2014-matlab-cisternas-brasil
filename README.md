@@ -1,6 +1,15 @@
-# cisternas
+# Rainwater Harvesting Model
 
-Before using this program, please read the documentation located in the 'doc' folder.
+## Getting Started
+
+Before using this program, please read the documentation located in the *doc* folder.
 This documentation describes the steps needed to apply this rainwater harvesting model to verifying our results or analyzing new data sets.
 
-Matlab software is required; this program has not been tested on Octave software.
+## System Requirements
+
+Running this model requires Matlab proprietary software; this model has not been tested in Octave software.
+Please see documentation for more details.
+
+## License to Use
+
+Please read the *license.md* document
