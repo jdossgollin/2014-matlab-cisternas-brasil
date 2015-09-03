@@ -78,7 +78,7 @@ Unfortunately, doing so would violate the data use policy of the \ac{INMET}, whi
 They require that each person who uses the data register with their online site.
 Therefore, all we can do is provide the best possible instructions for accessing their data.
 
-\subsection{Registering with the \acs{INMET}}
+\subsection{Registering with the \acs{INMET}} \label{register}
 In order to download the data from the \ac{INMET} you need to create an account with them.
 Because their web page is written only in Portuguese, this section will walk you through that process.
 
@@ -106,6 +106,11 @@ Because their web page is written only in Portuguese, this section will walk you
 \end{enumerate}
 
 \subsection{Downloading the Data}
+
+There are two methods that you can use to download the data.
+The first is tedious but straightforward; the other is more efficient but requires greater programming ability.
+
+\subsubsection{Method 1: Manual Download}
 \begin{enumerate}
 \item Go to the \ac{INMET} \ac{BDMEP} website at \url{http://www.inmet.gov.br/projetos/rede/pesquisa/inicio.php}.
 \item Enter your user name (your email address) and password
@@ -129,7 +134,28 @@ Because their web page is written only in Portuguese, this section will walk you
 \item When you have downloaded all files, move all the text files into the \fn{data/INMET} folder. 
 \end{enumerate}
 
-We apologize that this process is so time-consuming.
+\subsubsection{Download Using \code{RCurl}}
+
+The manual download process, while effective, is undeniably cumbersome.
+We have written a script using the \code{R} language and the  \code{RCurl} package to automate the download process.
+The script is written to substitute for downloading files individually, and writes to file the same \code{.txt} files that manual download produces.
+This process runs slowly, but you do not need to remain at your computer while it runs.
+We also cannot guarantee that it will work perfectly, but we are committed to resolving any bugs with this script that arise.
+
+To use the \code{RCurl} method, you must first have the \code{R} language installed on your computer. You can also ensure that you have the \code{RCurl} package installed with the command \code{install.packages("RCurl")}. If you are not familiar with \code{R} or the instructions below, it is probably easier to download the data files manually.
+
+To use the script to automatically download data files from the \ac{BDMEP}:
+
+\begin{enumerate}
+\item If you have not already done so, follow the steps outlined at \cref{register} and create an account with the \ac{INMET}.
+\item Go to \url{github.com/jdossgollin/inmet} and select the \usee{download as .zip} option
+\item Extract the zip file and open the folder
+\item Enter your email and \ac{BDMEP} password into the corresponding spaces of the \code{R} script.
+\item If you wish, modify the start and/or end date in the script
+\item Run the code as source
+\item Move the data files generated to the \fn{/data/INMET} directory of the \mtlb program described in this document
+\item For more questions about the \code{R} script to download these files, please use the features of the \fn{Github} web site.
+\end{enumerate}
 
 
 \section{Running the Model}
