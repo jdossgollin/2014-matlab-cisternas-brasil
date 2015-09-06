@@ -38,9 +38,9 @@ cleveref % automatic cross-references
 \maketitle %titlepage
 
 \begin{abstract} % summary of this document
-This is a guide to the model used in the paper \thepaper \ (henceforth \cite{dossgollin2015}).
-This document will explain the steps needed to replicate the findings of \cite{dossgollin2015}, including accessing and downloading the data, cleaning and formatting the data, and running the model under default assumptions or sensitivity analysis.
-This document is intended to accompany the paper \cite{dossgollin2015} , which explains the choices and assumptions that drive this model.
+This is a guide to the model used in the paper \thepaper.
+This document will explain the steps needed to replicate the findings of the paper \thepaper, including accessing and downloading the data, cleaning and formatting the data, and running the model under default assumptions or sensitivity analysis.
+This document is intended to accompany the paper, which explains the choices and assumptions that drive this model.
 \end{abstract}
 
 
@@ -79,31 +79,8 @@ They require that each person who uses the data register with their online site.
 Therefore, all we can do is provide the best possible instructions for accessing their data.
 
 \subsection{Registering with the \acs{INMET}} \label{register}
-In order to download the data from the \ac{INMET} you need to create an account with them.
-Because their web page is written only in Portuguese, this section will walk you through that process.
-
-\begin{enumerate}
-\item Go to \url{http://www.inmet.gov.br/projetos/rede/pesquisa/}. If, for some reason, that web link fails then try searching for \code{BDMEP - Banco de Dados Meteorol\'{o}gicos para Ensino e Pesquisa INMET}.
-\item Click the large green button that says \usee{Novo Cadastro}.
-\item Fill out the resulting form as follows:
-
-\begin{description}
-\item[Usu\'{a}rio] enter your e-mail	
-\item[Redigite (e-mail)] re-enter your e-mail for verification
-\item[Nome] Your first name
-\item[Sobrenome] Your last name
-\item[Tipo (N,E e G)] leave as N (do not modify)
-\item[Institui\c{c}\~{a}o] your institution (university, government agency, etc.) If none apply, write \code{N/a}
-\item[Cargo/Fun\c{c}\~{a}o] your position within that institution. If none apply, write \code{researcher}
-\item[Documento (RG)]
-\item[CPF]
-\item[Endere\c{c}o] Your work address
-\item[CEP]
-\item[Telefones] Your telephone number. Please enter a number beginning with +1
-\item[\'{A}rea de aplica\c{c}\~{a}o dos dados] This question is requesting what you will use the data for. Please write \code{Research}. 
-\end{description}
-
-\end{enumerate}
+In order to download the data from the \ac{INMET} you need to create an account with them at \url{http://www.inmet.gov.br/projetos/rede/pesquisa/}.
+If you have difficulty with this step, please email \texttt{james.doss-gollin@columbia.edu}.
 
 \subsection{Downloading the Data}
 
@@ -118,9 +95,9 @@ The first is tedious but straightforward; the other is more efficient but requir
 
 \item Fill out the new dialogue box as follows:
 \begin{description}
-\item[Per\'{i}odo - Data inicio (dd/mm/aaaa)] Start date (dd/mm/yyyy format). \citet{dossgollin2015} uses 01/01/1950.
-\item[fim] End date (dd/mm/yyyy format). \citet{dossgollin2015} uses 31/12/2013.
-\item[Drop-Down Menu] the quickest option is to select the drop-down menu on the left (\usee{Regi\~{a}o)} and select \usee{Nordeste}. However, this may omit one or more of the stations used in \cite{dossgollin2015}. For full replication, you must select Cear\'{a} from the drop-down menu on the right. The following steps will then need to be repeated for the states of Rio Grande do Norte, Paraiba, Pernambuco, Alagoas, Sergipe, Bahia, Minas Gerais, Piau\'{i}, and Maranh\~{a}o.
+\item[Per\'{i}odo - Data inicio (dd/mm/aaaa)] Start date (dd/mm/yyyy format). \thepaper uses 01/01/1950.
+\item[fim] End date (dd/mm/yyyy format). \thepaper uses 31/12/2013.
+\item[Drop-Down Menu] the quickest option is to select the drop-down menu on the left (\usee{Regi\~{a}o)} and select \usee{Nordeste}. However, this may omit one or more of the stations used in the paper. For full replication, you must select Cear\'{a} from the drop-down menu on the right. The following steps will then need to be repeated for the states of Rio Grande do Norte, Paraiba, Pernambuco, Alagoas, Sergipe, Bahia, Minas Gerais, Piau\'{i}, and Maranh\~{a}o.
 \item[checkbox] Click the checkbox corresponding to \usee{precipita\c{c}\~{a}o (mm)}.
 \item[submit] Click the button at the bottom that says \usee{pesquisa}. Confirm if you are asked to do so.
 \end{description}
@@ -218,7 +195,7 @@ The following \mtlb files are included in the \fn{code} directory. Documentation
 \subsection{The \fn{data} Folder} \label{dfolder}
 The data folder contains three child directories which contain separate data sets:
 \begin{description}
-\item[\fn{INMET}] is currently empty. Once you have downloaded the data from the \
+\item[\fn{INMET}] is currently empty. Once you have downloaded the data from the \fn{INMET} website, move the text files to this folder.
 \item[\fn{Roofs}] contains four text files containing roof data:
 \begin{description}
 \item[\fn{default.txt}] contains the default set of roofs used for the simulation as presented in the article.
@@ -234,14 +211,6 @@ A \code{.pdf} file is compatible on virtually all machines.
 For those who are interested, we also provide the \code{.tex} code used to generate the \code{.pdf} document.
 The \code{.bib} file containing references used in this document is also provided.
 
-
-\section{Further Questions}
-
-This model is hosted on \code{Github} and we request that all feedback or questions related to implementation of the model go through that site.
-Please visit \github and click the \usee{Issue} tab.
-This allows us to respond to your comment as rapidly as possible.
-It also ensures that others have access to your question and our response.
-We will prioritize issues that relate to bugs in the software or help needed over feature requests.
 
 
 
