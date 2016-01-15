@@ -7,8 +7,10 @@ If you do not have access to the paper and would like to read it, please contact
 
 ## Getting Started
 
-Before using this program, please read the documentation located in the *doc* folder.
+Before using this program, please read the documentation located in the `doc` folder.
 This documentation describes the steps needed to apply this rainwater harvesting model to verifying our results or analyzing new data sets.
+Please note that collecting the data, which we are not permitted to freely distribute, is non-trivial.
+Steps are given in the documentation.
 
 ## System Requirements
 
